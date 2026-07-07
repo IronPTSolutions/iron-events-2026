@@ -1,7 +1,13 @@
+require('dotenv').config();
+
 const express = require('express');
-const apiRouter = require('./controllers')
+const apiRouter = require('./controllers');
+
+require('./lib/db');
 
 const app = express();
+
+app.use(express.json());
 
 app.use('/api/v0', apiRouter);
 
