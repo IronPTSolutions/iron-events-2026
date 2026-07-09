@@ -3,6 +3,18 @@ require('dotenv').config();
 const convict = require('convict');
 
 const config = convict({
+  build: {
+    service: {
+      doc: 'App name',
+      format: String,
+      default: process.env.npm_package_name
+    },
+    version: {
+      doc: 'App name',
+      format: String,
+      default: process.env.npm_package_version
+    }
+  },
   port: {
     doc: 'Api port to bind',
     format: 'port',

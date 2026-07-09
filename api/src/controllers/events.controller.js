@@ -2,6 +2,7 @@ const createHttpError = require('http-errors');
 const Event = require('../lib/models/event.model');
 
 module.exports.list = async (req, res, next) => {
+  req.log.error('Listing events from database');
   const events = await Event.find();
   res.json(events);
 }
