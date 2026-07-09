@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const createHttpError = require('http-errors');
 
 module.exports.notFound = (req, res, next) => {
@@ -5,11 +6,27 @@ module.exports.notFound = (req, res, next) => {
 }
 
 module.exports.globalHandler = (error, req, res, next) => {
-  if (!error.status) error = createHttpError(500, error);
+  if (error instanceof mongoose.Error.ValidationError) {
+    error = createHttpError(400, error);
+  } else if (error instanceof mongoose.Error.CastError && error.message.includes('_id')) {
+    error = createHttpError(404, 'Resource not found');
+  } else if (!error.status) {
+    error = createHttpError(500, error);
+  }
+
+  req.log.error(error);
 
   const data = {
     message: error.message
   };
+  if (error.errors) {
+    const errors = Object.keys(error.errors)
+      .reduce((errors, property) => {
+        errors[property] = error.errors[property].message;
+        return errors;
+      }, {});
+    data.errors = errors;
+  }
 
   res.status(error.status).json(data);
 }
