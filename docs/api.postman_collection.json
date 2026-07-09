@@ -1,0 +1,169 @@
+{
+  "info": {
+    "_postman_id": "fbd88e63-2223-4090-84e6-ab1edcd4fdcc",
+    "name": "iron-events-2026",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "1194541"
+  },
+  "item": [
+    {
+      "name": "events",
+      "item": [
+        {
+          "name": "events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/events",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "events"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "event",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/events/:id",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "events",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "6a4d512a2ccc87826a949c7c"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "event",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{API_BASE_URL}}/events/:id",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "events",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "6a4d52a8bb2fde1452bc113c"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "event",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Hello World!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_BASE_URL}}/events/:id",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "events",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "6a4d512a2ccc87826a949c7c"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "event",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"H\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{API_BASE_URL}}/events",
+              "host": [
+                "{{API_BASE_URL}}"
+              ],
+              "path": [
+                "events"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "API_BASE_URL",
+      "value": ""
+    }
+  ]
+}
