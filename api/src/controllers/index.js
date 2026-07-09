@@ -7,5 +7,4 @@ const router = Router();
 router.get('/events', events.list);
 router.post('/events', events.create);
 
-
 module.exports = router;
