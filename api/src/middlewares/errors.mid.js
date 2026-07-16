@@ -22,7 +22,7 @@ module.exports.globalHandler = (error, req, res, next) => {
   if (error.errors) {
     const errors = Object.keys(error.errors)
       .reduce((errors, property) => {
-        errors[property] = error.errors[property].message;
+        errors[property] = error.errors[property].message ?? error.errors[property];
         return errors;
       }, {});
     data.errors = errors;
