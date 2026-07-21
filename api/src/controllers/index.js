@@ -13,6 +13,8 @@ router.patch("/events/:id", auth, events.update);
 
 // Users CRUD
 router.post("/users", users.create);
+// /me is a fixed segment, not a dynamic :id, so it must be declared before any /:id route
+router.get("/users/me", auth, users.profile);
 
 // Sessions CRUD — POST creates a session (login), DELETE destroys it (logout)
 // DELETE requires auth so only a currently logged-in user can log themselves out

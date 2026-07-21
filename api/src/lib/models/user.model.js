@@ -39,6 +39,7 @@ const userSchema = new Schema(
   {
     timestamps: true,
     toJSON: {
+      virtuals: true,
       transform: function (doc, ret) {
         ret.id = ret._id;
         delete ret._id;
@@ -60,6 +61,13 @@ userSchema.pre("save", async function () {
 userSchema.methods.checkPassword = function (passwordToCheck) {
   return bcrypt.compare(passwordToCheck, this.password);
 };
+
+userSchema.virtual("events", {
+  ref: "Event",
+  localField: "_id",
+  foreignField: "author",
+  justOne: false,
+});
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

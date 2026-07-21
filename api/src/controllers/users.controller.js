@@ -49,3 +49,10 @@ module.exports.logout = async (req, res, next) => {
   req.session.destroy();
   res.status(204).send();
 };
+
+// Returns the authenticated user's profile with their associated events expanded
+module.exports.profile = async (req, res, next) => {
+  // Re-query instead of reusing req.user because populate was not applied in the auth middleware
+  const user = await User.findById(req.user._id).populate("events");
+  res.json(user);
+};
