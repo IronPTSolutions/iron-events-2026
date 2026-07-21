@@ -13,9 +13,11 @@
   "type": "commonjs",
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "connect-mongo": "^6.0.0",
     "convict": "^6.2.5",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "http-errors": "^2.0.1",
     "mongoose": "^9.7.4",
     "pino": "^10.3.1",

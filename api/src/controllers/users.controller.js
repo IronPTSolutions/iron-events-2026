@@ -1,6 +1,5 @@
 const createHttpError = require("http-errors");
 const User = require("../lib/models/user.model");
-const Session = require("../lib/models/session.model");
 
 const ERROR_USER_ALREADY_EXIST = {
   message: "User validation fails",
@@ -39,20 +38,14 @@ module.exports.login = async (req, res, next) => {
     return next(createHttpError(401, "invalid password"));
   }
 
-  // 24-hour TTL; Mongoose TTL index on Session will auto-delete the document after this date
-  const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1_000);
+  // Store the user's ID in the session so subsequent requests can identify the caller
+  req.session.userId = user.id;
 
-  const session = await Session.create({
-    user: user.id,
-    expiresAt,
-  });
+  res.json(user);
+};
 
-  res.cookie("sessionid", session.getSignedId(), {
-    httpOnly: true,   // blocks JS access to the cookie — mitigates XSS token theft
-    sameSite: "strict", // cookie is not sent on cross-site requests — mitigates CSRF
-    path: "/",
-    expires: expiresAt,
-  });
-
-  res.json({ msg: "OK" });
+module.exports.logout = async (req, res, next) => {
+  // Destroys the server-side session record; the browser cookie becomes orphaned and unusable
+  req.session.destroy();
+  res.status(204).send();
 };

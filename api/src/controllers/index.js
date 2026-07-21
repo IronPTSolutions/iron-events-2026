@@ -13,6 +13,10 @@ router.patch("/events/:id", auth, events.update);
 
 // Users CRUD
 router.post("/users", users.create);
+
+// Sessions CRUD — POST creates a session (login), DELETE destroys it (logout)
+// DELETE requires auth so only a currently logged-in user can log themselves out
 router.post("/sessions", users.login);
+router.delete("/sessions", auth, users.logout);
 
 module.exports = router;
